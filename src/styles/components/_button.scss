@@ -1,0 +1,65 @@
+@use '../core' as *;
+@use 'sass:color';
+
+@mixin base-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: $border-radius;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: $font-base;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button {
+  @include base-button;
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: -5%);
+    }
+  }
+
+  &--primary-light {
+    background-color: $color-primary-light;
+    color: $color-white;
+
+    &:hover {
+      background-color: color.adjust($color-primary-light, $lightness: -5%);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    color: $color-primary;
+    border: 1px solid $color-primary;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+  }
+
+  &--tertiary {
+    background-color: $color-white;
+    color: $color-dark;
+    border: none;
+
+    &:hover {
+      background-color: $color-accent;
+    }
+  }
+
+  &--icon {
+    gap: 0.5rem;
+
+    svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
+}

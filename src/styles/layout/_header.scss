@@ -1,0 +1,51 @@
+@use '../core' as *;
+@use '../components/button' as btn;
+.header {
+  background-color: $color-secondary;
+  border-bottom: 1px solid rgba($color-dark, 0.1);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__logo {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    color: $color-primary;
+    font-weight: 600;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $color-dark;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__cta {
+    @include btn.base-button;
+    background-color: $color-accent;
+    color: $color-white;
+  }
+}
