@@ -1,5 +1,6 @@
 @use '../core' as *;
 @use '../components/button' as btn;
+
 .header {
   background-color: $color-secondary;
   border-bottom: 1px solid rgba($color-dark, 0.1);
@@ -44,7 +45,8 @@
   }
 
   &__cta {
-    @include btn.base-button;
+    @include btn.button(secondary);
+
     background-color: $color-accent;
     color: $color-white;
   }
