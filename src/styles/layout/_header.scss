@@ -1,53 +1,115 @@
 @use '../core' as *;
 @use '../components/button' as btn;
 
+$bp-md: 992px;
+$header-h: 80px;
+
 .header {
-  background-color: $color-secondary;
-  border-bottom: 1px solid rgba($color-dark, 0.1);
+  background: #f3ede8;
+  border-bottom: 1px solid rgba($color-dark, .1);
+  min-height: $header-h;
 
   &__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 0 1rem;
+    height: $header-h;
+
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    gap: 2rem;
   }
 
   &__logo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
     font-family: $font-heading;
     font-size: 1.5rem;
-    color: $color-primary;
     font-weight: 600;
+
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible { opacity: .85; }
   }
 
   &__nav {
+    flex: 1 1 auto;
     display: flex;
+    justify-content: center;
     gap: 1.5rem;
 
-    @media (max-width: 768px) {
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1rem;
+    @media (max-width: $bp-md) {
+      position: fixed;
+      inset: 0 0 0 40%;
+      padding: 100px 2rem 2rem;
+
+      flex-direction: column;
+      gap: 1.25rem;
+
+      background: #fff;
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      z-index: 1000;
+
+      &.is-open { transform: translateX(0); }
     }
   }
 
   &__link {
-    text-decoration: none;
-    color: $color-dark;
     font-weight: 500;
-    transition: color 0.2s;
+    color: $color-dark;
+    text-decoration: none;
+    transition: color .2s;
 
-    &:hover {
-      color: $color-primary;
-    }
+    &:hover { color: $color-primary; }
   }
 
+  /* ── КНОПКА ЗАПИСАТИСЯ ── */
   &__cta {
     @include btn.button(secondary);
+    text-decoration: none;
 
-    background-color: $color-accent;
-    color: $color-white;
+    @media (max-width: $bp-md) { display: none; }
+  }
+
+  .burger {
+    display: none;
+    width: 32px;
+    height: 24px;
+    margin-left: auto;
+    position: relative;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    @media (max-width: $bp-md) { display: block; }
+
+    &__line,
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #000;
+      border-radius: 2px;
+      transition: .25s ease;
+    }
+    &__line   { top: 50%; transform: translateY(-50%); }
+    &::before { top: 0; }
+    &::after  { bottom: 0; }
+
+    &[aria-expanded='true'] {
+      &::before { transform: translateY(10px) rotate(45deg); }
+      &::after  { transform: translateY(-10px) rotate(-45deg); }
+      .burger__line { opacity: 0; }
+    }
   }
 }
+
+.no-scroll { overflow: hidden; }
