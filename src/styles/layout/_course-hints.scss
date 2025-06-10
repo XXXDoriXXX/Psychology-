@@ -1,0 +1,105 @@
+
+$bp-lg : 1200px;
+$bp-md : 900px;
+$bp-sm : 600px;
+$bp-xs : 480px;
+$bp-xxs: 375px;
+
+$color-bg      : #f3ede8;
+$color-grad-1  : #a35b5b;
+$color-grad-2  : #8b4c4c;
+
+.course-hints {
+  background: $color-bg;
+  padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 4vw, 2rem);
+
+  &__container {
+    max-width: $bp-lg;
+    margin: 0 auto;
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 2rem);
+
+    @media (max-width: $bp-md) { flex-direction: column; }
+  }
+
+  &__left {
+    flex: 0 0 260px;
+
+    .course-hints__title {
+      font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+      font-weight: 400;
+      margin-top: .5rem;
+    }
+  }
+
+  &__right { flex: 1 1 auto; }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+
+    @media (max-width: $bp-sm)  { grid-template-columns: 1fr; }       // ≤600
+    @media (max-width: $bp-xs)  { grid-template-columns: repeat(1, 1fr); } // 480–601
+    @media (max-width: $bp-xxs) { grid-template-columns: 1fr; }       // ≤375
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    background: linear-gradient(180deg, $color-grad-1, $color-grad-2);
+    color: #fff;
+    border-radius: clamp(16px, 2vw, 24px);
+    padding: clamp(1.25rem, 2vw, 2rem);
+    min-height: clamp(140px, 22vw, 180px);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    line-height: 1.4;
+
+    p { margin: 0; }
+  }
+
+  &__num {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 3vw, 3rem);
+    opacity: .5;
+  }
+  &__icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: clamp(48px, 7vw, 90px);
+    height: auto;
+    opacity: .9;
+  }
+}
+@media (max-width: $bp-md) {
+  .course-hints {
+
+    &__left,
+    &__right {
+      flex: 1 1 100%;
+    }
+    &__left {
+      text-align: center;
+
+      .course-hints__title {
+        margin: 0 0 1rem;
+        font-size: 36px;
+        font-weight: 100;
+      }
+    }
+
+
+    &__grid {
+      margin-top: 1rem;
+    }
+  }
+}

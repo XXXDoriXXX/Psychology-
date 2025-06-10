@@ -1,4 +1,7 @@
 @use 'core';
-@use 'components/button';
 @use 'layout/header';
 @use 'layout/hero';
+@use 'components/button' as btn;
+@use 'layout/quiz';
+@use 'layout/course-hints';
+@use 'layout/about-course';

@@ -1,0 +1,96 @@
+$bp-md : 900px;
+$bp-sm : 700px;
+$bp-xs : 480px;
+$bp-xxs: 375px;
+
+.about-course {
+  background-color:#f3ede8;
+  padding:4rem 2rem;
+
+  &__container{
+    max-width:1200px; margin:0 auto;
+    display:flex; gap:2rem; align-items:flex-start;
+
+    @media(max-width:900px){ flex-direction:column; }
+  }
+
+  &__left  { flex:0 0 260px; }
+  &__right { flex:1 1 auto; }
+
+  &__title{
+    font-family:'Georgia',serif;
+    font-size:clamp(2.2rem,5vw,4rem);
+    color:#9d5c63; line-height:1.1; margin:0 0 2.5rem;
+  }
+
+  &__text-block p{
+    margin:1rem 0; font-size:1.1rem; line-height:1.55;
+  }
+
+  &__image{
+    float:right;
+    width:clamp(200px,35%,340px);
+    height:auto;
+    margin:0 0 1rem 2rem;
+    shape-margin:1rem;
+
+    @media(max-width:700px){
+      float:none;
+      display:block;
+      margin:0 auto 2rem;
+    }
+  }
+
+  &__text-block::after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+  @media (max-width: $bp-md) {
+    &__container { flex-direction: column; }
+
+    &__left  {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    &__side-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      margin: 0;
+    }
+  }
+
+  /* ============  ≤ 700 px  ================= */
+  @media (max-width: $bp-sm) {
+    &__image {
+      width: clamp(160px, 60%, 260px);
+      margin: 0 auto 1.5rem;
+    }
+
+    &__title {
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+  }
+
+  /* ============  ≤ 480 px  ================= */
+  @media (max-width: $bp-xs) {
+    &__text-block p {
+      font-size: 1rem;
+    }
+  }
+
+  /* ============  ≤ 375 px  ================= */
+  @media (max-width: $bp-xxs) {
+    padding: 3rem 1rem;
+
+    &__title {
+      font-size: 1.6rem;
+    }
+
+    &__image {
+      width: 70%;
+    }
+  }
+}

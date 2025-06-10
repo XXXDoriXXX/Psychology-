@@ -1,5 +1,6 @@
 @use '../core' as *;
-@use '../components/button' as *;
+@use '../components/button' as btn;
+
 .hero {
   background-color: $color-secondary;
   padding: 4rem 2rem;
@@ -20,11 +21,12 @@
 
   &__title {
     font-family: $font-heading;
-    font-size: 2.75rem;
+    font-size: 3.75rem;
     color: $color-primary;
+    font-weight: 500;
     line-height: 1.3;
     margin-bottom: 1.5rem;
-
+    text-align: center;
     em {
       font-style: italic;
     }
@@ -47,8 +49,13 @@
   }
 
   &__btn {
-    @extend .button !optional;
-    margin-top: 2rem;
+    white-space: nowrap;
+    @include btn.button(primary);
+
+
+  }
+  .button-wrapper {
+    text-align: center;
   }
 
   &__image {

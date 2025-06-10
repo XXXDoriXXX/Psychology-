@@ -1,65 +1,85 @@
 @use '../core' as *;
 @use 'sass:color';
-
-@mixin base-button {
+@mixin button($variant) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: $border-radius;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+
+  font-size: 16px;
   font-weight: 600;
+  line-height: 1.2;
+  border-radius: 12px;
   text-decoration: none;
-  font-family: $font-base;
-  transition: background-color 0.2s ease-in-out;
-}
+  cursor: pointer;
+  transition: all 0.3s ease;
 
-.button {
-  @include base-button;
-
-  &--primary {
-    background-color: $color-primary;
-    color: $color-white;
-
-    &:hover {
-      background-color: color.adjust($color-primary, $lightness: -5%);
-    }
-  }
-
-  &--primary-light {
-    background-color: $color-primary-light;
-    color: $color-white;
-
-    &:hover {
-      background-color: color.adjust($color-primary-light, $lightness: -5%);
-    }
-  }
-
-  &--secondary {
-    background-color: transparent;
-    color: $color-primary;
-    border: 1px solid $color-primary;
-
-    &:hover {
-      background-color: $color-secondary;
-    }
-  }
-
-  &--tertiary {
-    background-color: $color-white;
-    color: $color-dark;
+  @if $variant == primary {
+    display: block;
+    width: 70%;
+    padding: 1.5rem 3rem;
+    background-color: rgba(163, 91, 91, 1);
+    color: #fff;
     border: none;
 
     &:hover {
-      background-color: $color-accent;
+      background-color: rgba(218, 133, 133, 1);
     }
   }
 
-  &--icon {
-    gap: 0.5rem;
+  @else if $variant == secondary {
+    padding: 0.5rem 1.5rem;
+    width: auto;
+    border: 1px solid rgba(163, 91, 91, 1);
+    background-color: transparent;
+    color: rgba(163, 91, 91, 1);
 
-    svg {
-      width: 1em;
-      height: 1em;
+    &:hover {
+      background-color: rgba(218, 133, 133, 1);
+      border-color: rgba(218, 133, 133, 1);
+      color: #fff;
     }
   }
+
+  @else if $variant == tertiary {
+    padding: 1.5rem 3rem;
+    background-color: #fff;
+    color: rgba(163, 91, 91, 1);
+    border-radius: 12px;
+    border: none;
+
+    &:hover {
+      background-color: rgba(218, 133, 133, 1);
+      color: #fff;
+    }
+
+    &.variant2 {
+      background-color: rgba(218, 133, 133, 1);
+      color: #fff;
+      border: 1px solid rgba(218, 133, 133, 1);
+
+      &:hover {
+        background-color: color.adjust(rgba(218, 133, 133, 1), $lightness: -10%);
+      }
+    }
+
+  }
+
 }
+.button {
+  @include button(primary);
+}
+
+.button--primary {
+  @include button(primary);
+}
+
+.button--secondary {
+  @include button(secondary);
+}
+
+.button--tertiary {
+  @include button(tertiary);
+}
+
