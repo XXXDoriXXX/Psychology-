@@ -17,7 +17,7 @@
 
   @if $variant == primary {
     display: block;
-    width: 100%;
+    width: 70%;
     padding: 1.5rem 3rem;
     background-color: rgba(163, 91, 91, 1);
     color: #fff;
@@ -29,7 +29,7 @@
   }
 
   @else if $variant == secondary {
-    padding: 1.5rem 3rem;
+    padding: 0.5rem 1.5rem;
     width: auto;
     border: 1px solid rgba(163, 91, 91, 1);
     background-color: transparent;

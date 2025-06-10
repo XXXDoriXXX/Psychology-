@@ -1,16 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ваш сценарий отношений — Header Demo</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
 <header class="header">
   <div class="header__container">
-    <div class="header__logo">
+    <a href="/" class="header__logo">
       <img src="images/logo.svg" alt="Логотип" />
-      <span>Ваш сценарий<br />отношений</span>
-    </div>
-    <nav class="header__nav">
+      <span>Ваш&nbsp;сценарий<br />отношений</span>
+    </a>
+
+    <nav class="header__nav" data-menu>
       <a href="#" class="header__link">Главная</a>
-      <a href="#" class="header__link">Про курс</a>
-      <a href="#" class="header__link">Об авторе</a>
+      <a href="#" class="header__link">Про&nbsp;курс</a>
+      <a href="#" class="header__link">Об&nbsp;авторе</a>
       <a href="#" class="header__link">Отзывы</a>
-      <a href="#" class="header__link">Частые вопросы</a>
+      <a href="#" class="header__link">FAQ</a>
     </nav>
-    <a href="#" class="button button--secondary button--icon">Записаться →</a>
+
+    <a href="#"
+       class="button button--secondary header__cta">
+      Записаться→
+    </a>
+    <button class="burger"
+            data-burger
+            aria-label="Меню"
+            aria-expanded="false">
+      <span class="burger__line"></span>
+    </button>
   </div>
 </header>
+
+<script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('[data-burger]');
+    const menu   = document.querySelector('[data-menu]');
+    if (!burger || !menu) return;
+
+    const FOCUSABLE = `
+        a[href], button:not([disabled]),
+        textarea, input[type="text"], input[type="radio"],
+        input[type="checkbox"], select
+      `;
+
+    let lastFocused;
+
+    const lockScroll   = () => document.body.classList.add('no-scroll');
+    const unlockScroll = () => document.body.classList.remove('no-scroll');
+
+    const focusTrap = (e) => {
+      if (e.key !== 'Tab') return;
+      const nodes = [...menu.querySelectorAll(FOCUSABLE)];
+      const first = nodes[0];
+      const last  = nodes[nodes.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    };
+
+    const openMenu = () => {
+      lastFocused = document.activeElement;
+      burger.setAttribute('aria-expanded', 'true');
+      menu.classList.add('is-open');
+      lockScroll();
+
+      menu.addEventListener('keydown', focusTrap);
+      menu.querySelector(FOCUSABLE)?.focus();
+
+      document.addEventListener('keydown', escClose);
+      document.addEventListener('click', clickOutside, { capture: true });
+    };
+
+    const closeMenu = () => {
+      burger.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+      unlockScroll();
+
+      menu.removeEventListener('keydown', focusTrap);
+      document.removeEventListener('keydown', escClose);
+      document.removeEventListener('click', clickOutside, { capture: true });
+
+      lastFocused?.focus();
+    };
+
+    const escClose     = (e) => e.key === 'Escape' && closeMenu();
+    const clickOutside = (e) =>
+            !menu.contains(e.target) && !burger.contains(e.target) && closeMenu();
+
+    burger.addEventListener('click', () =>
+            menu.classList.contains('is-open') ? closeMenu() : openMenu()
+    );
+
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeMenu();
+    });
+  });
+</script>
+</body>
+</html>
