@@ -1,0 +1,67 @@
+
+$burgundy: #A35B5B;
+$bg-light: #F3EEE9;
+
+$bp-xl: 1240px;
+$bp-lg: 1024px;
+$bp-md: 768px;
+$bp-sm: 560px;
+$bp-xs: 375px;
+
+.values {
+  background: $bg-light;
+  padding: 40px 100px;
+
+  @media (max-width: $bp-lg) { padding: 36px 40px; }
+  @media (max-width: $bp-md) { padding: 32px 24px; }
+  @media (max-width: $bp-xs) { padding: 24px 16px; }
+
+  &__container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  &__card {
+    flex: 1 1 calc((100% - 40px) / 3);
+    max-width: 400px;
+    min-width: 280px;
+    box-sizing: border-box;
+    padding: 24px;
+    border: 1px solid $burgundy;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+
+    @media (max-width: $bp-md) {
+      flex: 1 1 calc((100% - 20px) / 2);
+      max-width: none;
+    }
+    @media (max-width: $bp-sm) {
+      flex: 1 1 100%;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font: 500 18px/22px 'Inter', sans-serif;
+    color: $burgundy;
+
+    @media (max-width: $bp-sm) { font-size: 16px; line-height: 20px; }
+    @media (max-width: $bp-xs) { font-size: 15px; }
+  }
+
+  &__icon {
+    width: 130px;
+    height: 80px;
+
+    @media (max-width: $bp-sm)  { width: 104px; height: 64px; }
+    @media (max-width: $bp-xs)  { width: 90px;  height: 56px; }
+  }
+}
