@@ -1,0 +1,167 @@
+
+$burgundy:  #A35B5B;
+$pink:      #FFD0D5;
+$beige:     #FBF4EC;
+
+.program {
+  position: relative;
+  padding: 48px 100px;
+  background: $burgundy;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../../images/program-bg-card.svg') center/cover no-repeat;
+    opacity: .99;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font: 500 32px/1.2 'Cormorant Garamond', serif;
+    color: #fff;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__item {
+    border-top: 1px solid #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 228px;
+    padding-top: 40px;
+
+    &:last-child { border-bottom: 1px solid #fff; }
+  }
+
+  .lesson {
+    &__headline {
+      width: 403px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    &__number  { font: 500 58px/120% 'Inter', sans-serif; color: $pink; }
+    &__name    { font: 500 24px/120% 'Inter', sans-serif; color: #fff; }
+    &__desc    {
+      width: 293px;
+      font: 400 16px/120% 'Inter', sans-serif;
+      color: $beige;
+    }
+  }
+
+  &__cta { align-self: stretch; }
+}
+
+@media (max-width: 1280px) {
+  .program {
+    padding: 0px 60px;
+
+    &__item { gap: 160px; }
+
+    .lesson {
+      &__number { font-size: 48px; }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .program {
+    padding: 0px 40px;
+
+    &__item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .lesson {
+      &__headline { width: 100%; }
+      &__desc    { width: 100%; }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .program {
+    padding: 32px 24px;
+    gap: 32px;
+
+    &::after { background-size: 120%; }
+
+    &__title { font-size: 28px; }
+
+    .lesson {
+      &__number { font-size: 40px; }
+      &__name   { font-size: 20px; }
+      &__desc   { font-size: 15px; }
+    }
+
+    // кнопка
+    &__cta {
+      font-size: 16px;
+      padding: 24px 20px;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .program {
+    padding: 28px 20px;
+
+    // приховуємо силует, щоб не заважав читати
+    &::after { opacity: 0.06; }
+
+    .lesson {
+      &__number { font-size: 34px; }
+      &__name   { font-size: 18px; }
+      &__desc   { font-size: 14px; }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .program {
+    padding: 24px 16px;
+    gap: 24px;
+
+    &__title { font-size: 24px; }
+
+    .lesson {
+      &__headline { gap: 16px; }
+      &__number   { font-size: 30px; }
+      &__name     { font-size: 16px; }
+      &__desc     { font-size: 13px; }
+    }
+
+    &__cta {
+      font-size: 15px;
+      padding: 20px 16px;
+
+      svg { width: 24px; height: 24px; }
+    }
+  }
+}
