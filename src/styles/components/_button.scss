@@ -1,12 +1,13 @@
 @use '../core' as *;
 @use 'sass:color';
+*, *::before, *::after { box-sizing: border-box; }
 @mixin button($variant) {
+  // базові властивості
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   font-family: 'Inter', sans-serif;
-
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
@@ -15,55 +16,65 @@
   cursor: pointer;
   transition: all 0.3s ease;
 
+  // -------------- PRIMARY ---------------------------------
   @if $variant == primary {
     display: block;
-    width: 70%;
-    padding: 1.5rem 3rem;
-    background-color: rgba(163, 91, 91, 1);
+    width: 100%;
+    padding: 1.5rem 3rem;           // 24 × 48 px
+    background: rgba(163, 91, 91, 1);
     color: #fff;
     border: none;
 
-    &:hover {
-      background-color: rgba(218, 133, 133, 1);
-    }
+    &:hover { background: rgba(218, 133, 133, 1); }
+
+    // ––– Адаптація
+    @media (max-width: 768px)  { width: 100%; padding: 1.25rem 2rem; }
+    @media (max-width: 425px)  { padding: 1rem 1.5rem; font-size: 15px; }
+    @media (max-width: 375px)  { padding: .875rem 1.25rem; font-size: 14px; }
   }
 
+    // -------------- SECONDARY --------------------------------
   @else if $variant == secondary {
-    padding: 0.5rem 1.5rem;
-    width: auto;
+    padding: .5rem 1.5rem;
     border: 1px solid rgba(163, 91, 91, 1);
-    background-color: transparent;
+    background: transparent;
     color: rgba(163, 91, 91, 1);
-
+    width: 100%;
     &:hover {
-      background-color: rgba(218, 133, 133, 1);
+      background: rgba(218, 133, 133, 1);
       border-color: rgba(218, 133, 133, 1);
       color: #fff;
     }
+
+    // ––– Адаптація
+    @media (max-width: 768px) { padding: .5rem 1.25rem; }
+    @media (max-width: 425px) { padding: .5rem 1rem; font-size: 15px; }
+    @media (max-width: 375px) { padding: .4375rem .875rem; font-size: 14px; }
   }
 
+    // -------------- TERTIARY ---------------------------------
   @else if $variant == tertiary {
-    padding: 1.5rem 3rem;
-    background-color: #fff;
+    padding: 1.5rem 3rem;           // 24 × 48 px
+    width: 100%;                     // у секції program ми все одно ставимо 100%
+    background: #fff;
     color: rgba(163, 91, 91, 1);
-    border-radius: 12px;
     border: none;
 
     &:hover {
-      background-color: rgba(218, 133, 133, 1);
+      background: rgba(218, 133, 133, 1);
       color: #fff;
     }
 
-    &.variant2 {
-      background-color: rgba(218, 133, 133, 1);
-      color: #fff;
-      border: 1px solid rgba(218, 133, 133, 1);
+    // ––– Адаптація
+    @media (max-width: 1024px) { width: 100%; }      // планшети й нижче
+    @media (max-width: 768px)  { padding: 1.25rem 2rem; font-size: 16px; }
+    @media (max-width: 425px)  { padding: 1rem 1.5rem; font-size: 15px; }
+    @media (max-width: 375px)  {
+      padding: .875rem 1.25rem;
+      font-size: 14px;
 
-      &:hover {
-        background-color: color.adjust(rgba(218, 133, 133, 1), $lightness: -10%);
-      }
+      svg { width: 24px; height: 24px; }             // менша іконка
     }
-
   }
 
 }
